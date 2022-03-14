@@ -1,0 +1,89 @@
+.content_diagram_right_wrap {
+  min-width: 40%;
+  height: 600px;
+  padding: 20px 0px 20px 10px;
+
+  .diagram_right_content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.diagram_right_content_header {
+  border-bottom: 1px solid #282f3f;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  h2 {
+    color: #fff;
+  }
+}
+
+.diagram_right_work_wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.diagram_right_row {
+  height: 25px;
+  width: 100%;
+  display: flex;
+}
+
+.cell_left {
+  //   background: red;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3px;
+  position: relative;
+  :nth-child(1) {
+    color: #fff;
+  }
+  :nth-child(2) {
+    color: #13da5a;
+  }
+}
+
+.cell_right {
+  position: relative;
+  //   background: green;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3px;
+  :nth-child(1) {
+    color: #ff5050;
+  }
+  :nth-child(2) {
+    color: #fff;
+  }
+}
+
+.cell_left_mask {
+  transition: all 0.2 ease-in-out;
+  position: absolute;
+  background: #13da5a;
+  opacity: 0.3;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: all 0.6s ease-in-out;
+}
+.cell_right_mask {
+  transition: all 0.2 ease-in-out;
+  position: absolute;
+  background: #ff5050;
+  opacity: 0.3;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: all 0.6s ease-in-out;
+}

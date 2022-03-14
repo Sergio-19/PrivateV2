@@ -1,0 +1,16 @@
+.confirm_check_button {
+  min-width: 200px;
+  max-width: 300px;
+  height: 50px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #13da5a;
+
+  a {
+    text-decoration: none;
+    color: #101729;
+  }
+}
