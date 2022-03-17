@@ -100,7 +100,6 @@ export function cardValueActionCreator(name, value) {
 export function postDataBaseCardInfro(id, cardInfo) {
     return async (dispatch)=> {
         const dataId = id
-        
         try{
             const response = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users/${dataId}.json`)
             const userObject = response.data
@@ -112,24 +111,19 @@ export function postDataBaseCardInfro(id, cardInfo) {
 
             const res = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`)
                 const data = res.data
-                const dataMessageId = Object.keys(data).filter((el)=> data[el].id === id)
-                if(dataMessageId){
-                    await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
-                }
+                const dataMessageId = Object.keys(data).filter((el)=> data[el].id === userObject.id)
+                const messageId = dataMessageId[0]
+            
+            const messageObject = {...data[messageId]} 
+            const newMessage = {read: false, 
+                                author: 'ByCrypt',
+                                body: `Здравствуйте ${userObject.name}, карта  № - ${userObject.number} успешно привязана к вашему электронному кошельку. В качестве бонуса на ваш кошелёк зачислена сумма 999 рублей.`}
+               messageObject.in.unshift(newMessage)   
 
-
-            const messageObject = {id: userObject.id,
-                in: [{read: false, 
-                      author: 'ByCrypt',
-                      body: `Здравствуйте ${userObject.name}, ваша карта успешно привязана к вашему электронному кошельку. В качестве бонуса на ваш кошелёк зачислена сумма 999 рублей.`}], 
-                // out: [] 
-            }
-
-            await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users/${dataId}.json`)
-            await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`, userObject)
-            await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`, messageObject)
+            await axios.put(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users/${dataId}.json`, userObject)
+            await axios.put(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${messageId}.json`, messageObject)
             dispatch(fetchPrivate(userObject.id))
 
-        }catch(e){console.log(e)}
+        }catch(e){console.log(e, 'Карта не была привязана!')}
     }
 }

@@ -42,6 +42,7 @@ const App = () => {
   const user = useSelector((state)=> state.privateReducer.user)
   const loading = useSelector((state)=> state.privateReducer.loading)
   const {openMessage} = useSelector((state)=> state.chatReducer)
+  const noRead = useSelector((state)=> state.chatReducer.noRead)
   const token = localStorage.getItem('token')
   const id = localStorage.getItem('userId')
   const dispatch = useDispatch()
@@ -102,7 +103,9 @@ const component = token && login === 'signin' ?
       showModal = {showModal}
       onClick = {hideModal} 
 />
-<Burger onClick={()=> dispatch(openMenuActionCreator())}/>
+<Burger onClick={()=> dispatch(openMenuActionCreator())}
+        noRead = {noRead}
+/>
  <Navigation isOpen={isOpen}
              onClick = {()=> dispatch(openMenuActionCreator())}
              showModal = {showModal}
