@@ -47,23 +47,24 @@ export const READ_MESSAGE = 'READ_MESSAGE'
 export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'
 
 
-export function addNewMessage(id){
+export function addNewMessage(id, body, author, payment){
         return async (dispatch) => {
                try{
                 const response = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`)
                 const data = response.data
-                console.log(data)
                 const dataMessageId = Object.keys(data).filter((el)=> data[el].id === id)
-                const userMesObject = data[dataMessageId]
+                console.log(dataMessageId)
+                const userMesObject = data[dataMessageId[0]]
                 const newUserMesObject = {...userMesObject}
-                const newMessage = {author: 'ByCrypt', 
-                                    body: 'Здравствуйте! Вы начали процесс подтверждения счёта. После обработки запроса, в сообщении вы получите ссылку на вывод средств, после этого процедура подтверждения счета будет завершена и вы сможете производить операции с вашим электронным кошельком. Приносим извинения за ожидание! С уважением команда ByCrypt.',
-                                    read: false 
-        }
+                const newMessage = {author: author, 
+                                    body: body,
+                                    read: false }
         newUserMesObject.in.push(newMessage)
-               await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
+        if(dataMessageId){
+                await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
+            }
+        //        await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
                await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`, newUserMesObject) 
-               const payment = true
                await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/payment.json`, payment)
                 dispatch({type: ADD_NEW_MESSAGE})
 

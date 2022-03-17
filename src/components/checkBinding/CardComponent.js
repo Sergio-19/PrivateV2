@@ -61,7 +61,7 @@ const CardComponent = () => {
                                 <div className= {getClasses('card_front_number', cardNumberValid, cardNumberTouched)}>
                                     <input type= 'number' 
                                            placeholder = '●●●● ●●●● ●●●● ●●●●'
-                                           onChange={(event)=> onChangeInput('cardNumber', event.target.value, 19)}
+                                           onChange={(event)=> onChangeInput('cardNumber', event.target.value, 16)}
                                            value = {cardNumber.value}
                                     
                                            />

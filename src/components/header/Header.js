@@ -8,6 +8,7 @@ import {loadingFalseActionCreator } from '../../store/privateReducer';
 const Header = () => {
 
     const noRead = useSelector((state)=> state.chatReducer.noRead)
+    const {user, loading} = useSelector((state)=> state.privateReducer)
     const dispatch = useDispatch()
 
     function openModal(type){
@@ -42,10 +43,12 @@ const Header = () => {
             </div>
             <div className='header_controllers'>
                 <div className='user_name'
-                     onClick={()=> openModal('confirm')}
+                     onClick={()=> openModal('purse')}
                     >
-                    <div style = {{width: '15px', height: '15px', borderRadius: '50%', background: '#FF504B'}}></div>
-                    <span>Счёт не подтверждён</span></div>
+                    {/* <div style = {{width: '15px', height: '15px', borderRadius: '50%', background: '#FF504B'}}></div> */}
+                    <span>id : {loading && user ? user.id.slice(0, 7) : ''} 
+                    &nbsp;<strong style = {{fontSize: '20px'}}>|</strong>&nbsp; 
+                    Баланс: {loading && user ? user.balance : 0} ₽</span></div>
                 <div className='header_controllers_item'>
                 <ul>
                     <li onClick={()=> openModal('purse')}>Кошелёк</li>

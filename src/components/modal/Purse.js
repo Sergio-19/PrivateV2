@@ -3,7 +3,7 @@ import SidebarButton from '../Sidebar/SidebarButton';
 
 
 
-const Purse = ({onClick, number, balance}) => {
+const Purse = ({onClick, number, balance, id}) => {
 
     function convertNumber(string){
         let newString = string.slice(0,4) + '  ' + string.slice(4,8) + '  ' + string.slice(8,12) + '  ' + string.slice(12,16)
@@ -17,11 +17,8 @@ const Purse = ({onClick, number, balance}) => {
                 <span>№ Карты</span>
                 <div className='purse_header_check'><span>{number ? convertNumber(number) : '●●●● ●●●● ●●●● ●●●●'}</span></div>
             </div>
-            <div className='purse_header_notverified'
-                 onClick = {()=> onClick('confirm')}
-            >
-                <div className='purse_header_round' ></div>
-                <span>Подтвердите счёт</span>
+            <div className='purse_header_notverified'>
+                <span>Кошелёк № :  <strong style = {{color: '#2AB641', fontSize: '18px'}}>{id.slice(0,7)}</strong></span>
             </div>
         </div>
         <div className = 'purse_content'>
@@ -41,10 +38,10 @@ const Purse = ({onClick, number, balance}) => {
         </div>
         <div className = 'purse_footer_wrap'>
             <div className='purse_footer_btn'>
-                <SidebarButton title = 'Новая сделка' onClick = {onClick} type = 'confirm' />
+                {/* <SidebarButton title = 'Новая сделка' onClick = {onClick} type = 'confirm' /> */}
                 <SidebarButton title = 'Внести средства' onClick = {onClick} type = 'confirm'/>
                 <SidebarButton title = 'Вывести средства' onClick = {onClick} type = 'confirm'/>
-                <SidebarButton title = 'Перевести средства' onClick = {onClick} type = 'confirm'/>
+                <SidebarButton title = 'Перевести средства' onClick = {onClick} type = 'transition'/>
             </div>
         </div>
     </div>

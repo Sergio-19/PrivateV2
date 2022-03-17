@@ -21,6 +21,7 @@ import { fetchPrivate, privateDataActionCreator } from './store/privateReducer'
 import Chat from './components/modal/Chat'
 import Loader from './components/loader/Loader'
 import { closeMessageActionCreator } from './store/chatReducer'
+import Transition from './components/modal/Transition'
 
 
 
@@ -83,10 +84,14 @@ function getOptions(type){
     component = <Purse onClick = {openModal} 
                        number = {user.number}
                        balance = {user.balance}
+                       id = {user.id}
                        />
   }
   if(type === 'chat'){
     component = <Chat openMessage={openMessage}/>
+  }
+  if(type === 'transition'){
+    component = <Transition balance = {user.balance}  id = {user.id}/>
   }
   return{component, type}
 }

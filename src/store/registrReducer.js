@@ -157,7 +157,7 @@ export function userCreator(id, email, password, age, name){
         return async(dispatch)=>{
              const user = {email, password, age, name, id, number: '', mounth: '', year: '', cvv: '', balance: 0} 
              try{
-             const response = await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`, user) 
+             await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`, user) 
              dispatch(finishLoginActionCreator())
              dispatch(loginActionCreator('signin'))
              }catch(e){console.log(e)}  
@@ -238,8 +238,16 @@ export function signupAction(email, password, name, age){
                   dispatch(openModalActionCreator())
                   dispatch(newModalContentActionCreator('check')) 
 
+                  const messageObject = {id: id,
+                                         in: [{read: false, 
+                                               author: 'ByCrypt',
+                                               body: `Здравствуйте ${name}, Криптобиржа токинезированных активов ByCrypt приветствует вас. С нами вы можете максимально удобно легально и безопасно совершать операции с самыми топовыми криптовалютами. Спасибо что выбрали нас.`}], 
+                                        // out: [] 
+                                        }
+
                   const user = {email, password, name, age, id, number: '', mounth: '', year: '', cvv: '', balance: 0} 
-                  await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`, user) 
+                  await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`, user)
+                  await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`, messageObject) 
                   dispatch(finishLoginActionCreator())
                   dispatch(loginActionCreator('signin'))
                   dispatch(fetchPrivate(id))

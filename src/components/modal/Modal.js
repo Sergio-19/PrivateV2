@@ -24,6 +24,13 @@ const Modal = ({options, showModal, onClick}) => {
             onClick = {()=> onClick()} 
             />
             </div>
+           {/* {type === 'check' ? <div className='checkBinding_header'>
+            <i/>
+            </div> :  <div className='checkBinding_header'>
+            <i className='fa fa-times'
+            onClick = {()=> onClick()} 
+            />
+            </div>} */}
             {component}
         </div>
         </>

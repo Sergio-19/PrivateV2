@@ -4,7 +4,7 @@ import { fetchMessagesActionCreator, messageDataBaseIdActionCreator, notReadActi
 const initialState = {
     user: '',
     dataBaseID: '',
-    loading: false
+    loading: true
 
 }
 
@@ -61,7 +61,7 @@ export function fetchPrivate(id){
          const res = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`) 
                    const dat = res.data
                    const dataMessageId = Object.keys(dat).filter((el)=> dat[el].id === id)
-                   const messages = dat[dataMessageId]
+                   const messages = dat[dataMessageId[0]]
                    dispatch(fetchMessagesActionCreator(messages))
                    let counter = 0
                   messages.in.forEach((message)=> {

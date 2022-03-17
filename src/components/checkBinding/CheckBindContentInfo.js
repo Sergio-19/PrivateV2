@@ -37,14 +37,14 @@ const CheckBindContentInfo = () => {
     return(
     <div className='checkBinding_content_info'>
         <div className='checkBinding_content_info_message'>
-            <h3>Для совершения транзакций, пройдите процедуру подтверждения счёта.
-                Если вы уже предоставили данные вашей карты, закройте это окно!
+            <h3>Для совершения транзакций по вводу и выводу средств, укажите данные вашей карты.
+                Если вы уже это сделали, просто закройте это окно!
             </h3>
             <p>Введенная информация <span>строго конфиденциальна!</span></p>
         </div>
         <div className='checkBinding_content_info_btn'>
             <button 
-            onClick={()=> checkBindHandler('confirm', dataBaseID.join(''), {cardNumberValue,
+            onClick={()=> checkBindHandler('purse', dataBaseID.join(''), {cardNumberValue,
                                                                             mounthValue,
                                                                             yearValue,
                                                                             cvvValue

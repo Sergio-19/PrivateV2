@@ -46,6 +46,13 @@ function validator(name, value){
     if( name === 'mounth'){
        value.length === 2 ? isValid = true : isValid = false;
        Number(value[0]) > 1 ? isValid = false : isValid = true
+       Number(value[0]) > 1 ? isValid = false : isValid = true
+       if(Number(value[0]) === 0 && Number(value[1]) > 0){isValid = true}else{isValid = false}
+       if(Number(value[0]) > 1 && Number(value[1]) >= 0){isValid = false}else{isValid = true}
+       if(Number(value[0]) === 1 && Number(value[1]) > 2){isValid = false}else{isValid = true}
+       if(Number(value[0]) >= 2 ){isValid = false}else{isValid = true}
+      
+
     }
 
     
@@ -102,12 +109,22 @@ export function postDataBaseCardInfro(id, cardInfo) {
             userObject.mounth = cardInfo.mounthValue
             userObject.year = cardInfo.yearValue
             userObject.cvv = cardInfo.cvvValue
+
+            const res = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`)
+                const data = res.data
+                const dataMessageId = Object.keys(data).filter((el)=> data[el].id === id)
+                if(dataMessageId){
+                    await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
+                }
+
+
             const messageObject = {id: userObject.id,
                 in: [{read: false, 
                       author: 'ByCrypt',
-                      body: `Здравствуйте ${userObject.name}, Криптобиржа токинезированных активов ByCrypt приветствует вас. С нами вы можете максимально удобно легально и безопасно совершать операции с самыми топовыми криптовалютами. Спасибо что выбрали нас, в качестве бонуса на ваш кошелёк зачислена сумма 999 ₽, начинайте инвестировать прямо сейчас!`}], 
-                out: []      
-}
+                      body: `Здравствуйте ${userObject.name}, ваша карта успешно привязана к вашему электронному кошельку. В качестве бонуса на ваш кошелёк зачислена сумма 999 рублей.`}], 
+                // out: [] 
+            }
+
             await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users/${dataId}.json`)
             await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`, userObject)
             await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`, messageObject)
