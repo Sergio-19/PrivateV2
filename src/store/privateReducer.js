@@ -53,8 +53,8 @@ export function fetchPrivate(id){
          const response = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`) 
          const data = response.data
          const userObj = Object.keys(data).filter((el)=> data[el].id === id)
-         dispatch(dataBaseIdActionCreator(userObj))
-         const user = data[userObj]
+         dispatch(dataBaseIdActionCreator(userObj[0]))
+         const user = data[userObj[0]]
          dispatch(privateDataActionCreator(user))
          dispatch(loadindDataActionCreator())
 

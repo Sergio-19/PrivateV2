@@ -44,7 +44,7 @@ const CheckBindContentInfo = () => {
         </div>
         <div className='checkBinding_content_info_btn'>
             <button 
-            onClick={()=> checkBindHandler('purse', dataBaseID.join(''), {cardNumberValue,
+            onClick={()=> checkBindHandler('purse', dataBaseID, {cardNumberValue,
                                                                             mounthValue,
                                                                             yearValue,
                                                                             cvvValue

@@ -53,19 +53,17 @@ export function addNewMessage(id, body, author, payment){
                 const response = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`)
                 const data = response.data
                 const dataMessageId = Object.keys(data).filter((el)=> data[el].id === id)
-                console.log(dataMessageId)
                 const userMesObject = data[dataMessageId[0]]
                 const newUserMesObject = {...userMesObject}
                 const newMessage = {author: author, 
                                     body: body,
                                     read: false }
-        newUserMesObject.in.push(newMessage)
-        if(dataMessageId){
-                await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
-            }
+        newUserMesObject.in.unshift(newMessage)
+
+        
         //        await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId}.json`)
-               await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json`, newUserMesObject) 
-               await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/payment.json`, payment)
+               await axios.put(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${dataMessageId[0]}.json`, newUserMesObject) 
+               if(payment){ await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/payment.json`, payment)}
                 dispatch({type: ADD_NEW_MESSAGE})
 
                }catch(e){console.log(e)}
@@ -109,7 +107,7 @@ export function processMessage(read, author, body, id, message, messages, i){
                 dispatch(openMessageActionCreator(read, author, body))
                 await setTimeout(()=>{
                         dispatch({type: NEW_MODAL_CONTENT, payload: 'chat'})      
-                      }, 800)
+                      }, 600)
                 let baseId = id
                 let mes = message
                 let index = i
@@ -122,8 +120,9 @@ export function processMessage(read, author, body, id, message, messages, i){
                     if(message.read === false){ counter ++}
                 })
                 dispatch(notReadActionCreator(counter))
-                await axios.delete(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${baseId}.json`)
-                await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/.json`, messagesObject) 
+            
+                await axios.put(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/messages/${baseId}.json`, messagesObject)
+               
                
                
 

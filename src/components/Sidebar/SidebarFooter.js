@@ -12,7 +12,7 @@ const SidebarFooter = () => {
     }
     return(
         <div className='sidebar_footer'>
-                <SidebarButton title = 'Новая сделка' onClick = {openModal} type = 'confirm'/>
+                {/* <SidebarButton title = 'Новая сделка' onClick = {openModal} type = 'confirm'/> */}
                 <SidebarButton title = 'Внести средства' onClick = {openModal} type = 'confirm'/>
                 <SidebarButton title = 'Вывести средства' onClick = {openModal} type = 'confirm'/>
                 <SidebarButton title = 'Перевести средства' onClick = {openModal} type = 'confirm'/>
