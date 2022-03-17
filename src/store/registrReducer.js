@@ -166,9 +166,6 @@ export function userCreator(id, email, password, age, name){
 
 }
 
-
-
-
 export function authActionCreator(token, id){
         return{
                 type: AUTH_LOGIN,
@@ -177,31 +174,6 @@ export function authActionCreator(token, id){
         }
 }
 
-// export function authAction(email, password, login){
-//         return async (dispatch)=>{
-//                const authData = {email, password, returnSecureToken: true}
-//                let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBRo5E2BMSVhS_9UZCQGNZOvJcgPXD7Jto'
-//                if(login === 'signin'){
-//                url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBRo5E2BMSVhS_9UZCQGNZOvJcgPXD7Jto' 
-//               }
-//                if(login === 'signup'){
-//                 url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBRo5E2BMSVhS_9UZCQGNZOvJcgPXD7Jto'
-//                } 
-//                try{ 
-//                     const response = await axios.post(url, authData)
-//                     const token = response.data.idToken
-//                     const id = response.data.localId
-//                     localStorage.setItem('token',token)
-//                     localStorage.setItem('userId',id)
-//                     dispatch(finishLoginActionCreator())
-//                     dispatch(authActionCreator(token, id))    
-
-//                }catch(e){console.log(e)
-//                          dispatch(errorMessageActionCreator('Похоже вы еще не зарегистрированы!'))       
-//         }
-
-//         }       
-// }
 
 export function signinAction(email, password) {
         return async (dispatch)=> {
@@ -216,8 +188,8 @@ export function signinAction(email, password) {
                      dispatch(finishLoginActionCreator())
                      dispatch(authActionCreator(token, id))
                      dispatch(fetchPrivate(id))
-                     dispatch(openModalActionCreator()) 
-                     dispatch(newModalContentActionCreator('check'))   
+                //      dispatch(openModalActionCreator()) 
+                //      dispatch(newModalContentActionCreator('check'))   
 
               }catch(e){console.log(e)
                         dispatch(errorMessageActionCreator('Похоже вы еще не зарегистрированы!'))}
@@ -235,8 +207,8 @@ export function signupAction(email, password, name, age){
                   localStorage.setItem('userId',id)
                   dispatch(finishLoginActionCreator())
                   dispatch(authActionCreator(token, id))
-                  dispatch(openModalActionCreator())
-                  dispatch(newModalContentActionCreator('check')) 
+                //   dispatch(openModalActionCreator())
+                //   dispatch(newModalContentActionCreator('check')) 
 
                   const messageObject = {id: id,
                                          in: [{read: false, 

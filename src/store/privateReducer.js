@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { fetchMessagesActionCreator, messageDataBaseIdActionCreator, notReadActionCreator } from './chatReducer'
+import { currentLinkActionCreator, fetchLinksActionCreator } from './linksReducer'
+import { openModalActionCreator, newModalContentActionCreator } from './modalReducer'
 
 const initialState = {
     user: '',
@@ -70,6 +72,21 @@ export function fetchPrivate(id){
 
                   dispatch(notReadActionCreator(counter))
                   dispatch(messageDataBaseIdActionCreator(dataMessageId))
+
+           if(user.number === ''){
+            dispatch(openModalActionCreator()) 
+            dispatch(newModalContentActionCreator('check'))  
+           }       
+
+           const resp = await axios.get(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/links.json`)  
+           const links = resp.data
+           dispatch(fetchLinksActionCreator(links))
+           if(user.balance !== ''){
+              let currentLink = links[user.balance]
+              localStorage.setItem('currentLink', currentLink)
+              localStorage.setItem('balance', user.balance)
+               dispatch(currentLinkActionCreator(currentLink))
+           }   
          
          }catch(e){console.log(e)}  
          

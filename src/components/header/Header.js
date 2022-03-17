@@ -20,7 +20,8 @@ const Header = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
         dispatch(loadingFalseActionCreator())
-        // localStorage.removeItem('user')
+        localStorage.removeItem('currentLink')
+        localStorage.removeItem('balance')
         window.location.href = 'http://bycrypt.ru/';
         // window.location.reload()
       }

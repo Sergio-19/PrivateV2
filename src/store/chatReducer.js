@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { NEW_MODAL_CONTENT } from "./modalReducer"
+import { hideModalActionCreator, newModalContentActionCreator, NEW_MODAL_CONTENT, openModalActionCreator } from "./modalReducer"
+import { fetchPrivate } from './privateReducer'
 const initialState = {
         messages: [],
         messageDataBaseId: '',
@@ -67,6 +68,19 @@ export function addNewMessage(id, body, author, payment){
                 dispatch({type: ADD_NEW_MESSAGE})
 
                }catch(e){console.log(e)}
+        }
+}
+
+
+export function depositAction(id, body, author){
+        return async (dispatch) => {
+                dispatch(openModalActionCreator())
+                dispatch(newModalContentActionCreator('loader'))
+                await dispatch(addNewMessage(id, body, author)) 
+                dispatch(hideModalActionCreator()) 
+                dispatch(fetchPrivate(id))     
+                
+                
         }
 }
 

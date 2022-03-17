@@ -57,6 +57,11 @@ function hideModal(){
   dispatch(closeMessageActionCreator())
 }
 
+
+function goToConfirmPage(){
+  window.location.href = '/confirm'
+}
+
 const timerId = () => setInterval(()=> {
   let idx = getRandomId(4)
     dispatch(actionsArray[idx]())
