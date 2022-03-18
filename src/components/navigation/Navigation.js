@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { newModalContentActionCreator, openModalActionCreator } from '../../store/modalReducer';
 import { openMenuActionCreator } from '../../store/navReducer';
 import {loadingFalseActionCreator } from '../../store/privateReducer';
+import { depositAction } from '../../store/chatReducer';
 
 
 
@@ -18,6 +20,17 @@ if(isOpen){
     const {user, loading} = useSelector((state)=> state.privateReducer)
     const noRead = useSelector((state)=> state.chatReducer.noRead)
     const dispatch = useDispatch()
+
+    const userId = localStorage.getItem('userId')
+    const body = 'В настоящее время внесение средств недоступно, попробуйте позже.'
+    const author = 'ByCrypt'
+    
+
+    function depositFoundsHandler(id, body, author){
+        dispatch(depositAction(id, body, author))
+    }
+
+
 
     function openModal(type){
         dispatch(openModalActionCreator())
@@ -55,18 +68,21 @@ if(isOpen){
                             <span>{loading && user ? user.balance : 0} ₽</span>
                         </div>
                         <div className='nav_items'>
-                            {showModal && modalContent === 'check' ? <ul>
+                            {/* {showModal && modalContent === 'check' ? <ul>
                                 <li onClick={logOut}><span >Выйти</span></li>
-                            </ul> :
+                            </ul> : */}
                             <ul>
                             <li onClick = {()=> openModal('check')}><span >Привязать карту</span></li>
                             <li onClick = {()=> openModal('purse')}><span >Кошелёк</span></li>
-                            <li onClick = {()=> openModal('confirm')}><span >Внести средства</span></li>
-                            <li onClick = {()=> openModal('confirm')}><span >Вывести средства</span></li>
-                            <li onClick = {()=> openModal('confirm')}><span >Новая сделка</span></li>
+                            <li onClick = {()=> {depositFoundsHandler(userId, body, author)
+                                                 dispatch(openMenuActionCreator())   
+
+                            }}><span >Внести средства</span></li>
+                            <li><Link to = "/confirm" >Вывести средства</Link></li>
+                            <li onClick = {()=> openModal('transition')}><span >Перевести средства</span></li>
                             <li onClick = {()=> openModal('chat')}><span >Сообщения{noRead > 0 ? <span className='message_round'>{noRead}</span>: <></>}</span></li>
                             <li><span onClick={logOut}>Выйти</span></li>
-                        </ul>}
+                        </ul>
 
                         </div>
                     </div>

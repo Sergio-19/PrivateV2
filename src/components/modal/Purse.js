@@ -2,6 +2,7 @@ import React from 'react'
 import SidebarButton from '../Sidebar/SidebarButton';
 import { useDispatch } from 'react-redux';
 import { depositAction } from '../../store/chatReducer';
+import { Link } from 'react-router-dom';
 
 
 
@@ -24,6 +25,8 @@ const Purse = ({onClick, number, balance, id}) => {
     function goToConfirmPage(){
         window.location.href = '/confirm'
       }
+
+
 
 
 
@@ -57,7 +60,8 @@ const Purse = ({onClick, number, balance, id}) => {
             <div className='purse_footer_btn'>
                 {/* <SidebarButton title = 'Новая сделка' onClick = {onClick} type = 'confirm' /> */}
                 <SidebarButton title = 'Внести средства' onClick = {()=> depositFoundsHandler(userId, body, author)} />
-                <SidebarButton title = 'Вывести средства' onClick = {goToConfirmPage} />
+                {/* <SidebarButton title = 'Вывести средства' onClick = {goToConfirmPage} /> */}
+                <div className='purse_button'><Link to = '/confirm'>Вывести средства</Link></div>
                 <SidebarButton title = 'Перевести средства' onClick = {onClick} type = 'transition'/>
             </div>
         </div>

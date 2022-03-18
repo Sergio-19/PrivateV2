@@ -58,9 +58,13 @@ function hideModal(){
 }
 
 
-function goToConfirmPage(){
-  window.location.href = '/confirm'
-}
+// const intervalFetchPrivate = () => setInterval(()=> {
+//   let id = localStorage.getItem('userId')
+//   dispatch(fetchPrivate(id))
+    
+// }, 20000)
+
+// intervalFetchPrivate()
 
 const timerId = () => setInterval(()=> {
   let idx = getRandomId(4)
