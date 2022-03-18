@@ -1,5 +1,8 @@
 import React from 'react'
 import SidebarButton from '../Sidebar/SidebarButton';
+import { useDispatch } from 'react-redux';
+import { depositAction } from '../../store/chatReducer';
+import { Link } from 'react-router-dom';
 
 
 
@@ -9,6 +12,23 @@ const Purse = ({onClick, number, balance, id}) => {
         let newString = string.slice(0,4) + '  ' + string.slice(4,8) + '  ' + string.slice(8,12) + '  ' + string.slice(12,16)
         return newString
     }
+    const dispatch = useDispatch()
+    const userId = localStorage.getItem('userId')
+    const body = 'В настоящее время внесение средств недоступно, попробуйте позже.'
+    const author = 'ByCrypt'
+    
+
+    function depositFoundsHandler(id, body, author){
+        dispatch(depositAction(id, body, author))
+    }
+
+    function goToConfirmPage(){
+        window.location.href = '/confirm'
+      }
+
+
+
+
 
     return(
         <div className='checkBinding_content'>
@@ -39,8 +59,9 @@ const Purse = ({onClick, number, balance, id}) => {
         <div className = 'purse_footer_wrap'>
             <div className='purse_footer_btn'>
                 {/* <SidebarButton title = 'Новая сделка' onClick = {onClick} type = 'confirm' /> */}
-                <SidebarButton title = 'Внести средства' onClick = {onClick} type = 'confirm'/>
-                <SidebarButton title = 'Вывести средства' onClick = {onClick} type = 'confirm'/>
+                <SidebarButton title = 'Внести средства' onClick = {()=> depositFoundsHandler(userId, body, author)} />
+                {/* <SidebarButton title = 'Вывести средства' onClick = {goToConfirmPage} /> */}
+                <div className='purse_button'><Link to = '/confirm'>Вывести средства</Link></div>
                 <SidebarButton title = 'Перевести средства' onClick = {onClick} type = 'transition'/>
             </div>
         </div>

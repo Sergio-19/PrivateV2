@@ -57,6 +57,15 @@ function hideModal(){
   dispatch(closeMessageActionCreator())
 }
 
+
+// const intervalFetchPrivate = () => setInterval(()=> {
+//   let id = localStorage.getItem('userId')
+//   dispatch(fetchPrivate(id))
+    
+// }, 20000)
+
+// intervalFetchPrivate()
+
 const timerId = () => setInterval(()=> {
   let idx = getRandomId(4)
     dispatch(actionsArray[idx]())

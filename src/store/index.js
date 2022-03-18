@@ -10,6 +10,7 @@ import { modalReducer } from './modalReducer';
 import { privateReducer } from './privateReducer';
 import { creditcardReducer } from './creditcardReducer';
 import { chatReducer } from './chatReducer';
+import { linksReducer } from './linksReducer';
 
 const rootReducer = combineReducers({mainReducer, 
                                      cupReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({mainReducer,
                                      modalReducer,
                                      privateReducer,
                                      creditcardReducer,
-                                     chatReducer
+                                     chatReducer,
+                                     linksReducer
                                     })
 
 

@@ -84,12 +84,27 @@ section {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #191919;
+  }
+  &:hover {
+    background-color: #1d925e;
+  }
 }
 
-.btn > a {
-  text-decoration: none;
+.btn > button {
+  width: 250px;
+  height: 50px;
+  background: #00c46b;
+  border-radius: 8px;
   font-size: 18px;
   color: #191919;
+  cursor: pointer;
+  &:hover {
+    background-color: #1d925e;
+  }
 }
 
 .section_content_right {

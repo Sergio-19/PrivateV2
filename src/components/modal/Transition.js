@@ -19,7 +19,7 @@ const Transition = ({balance, id}) => {
 
     const userId = localStorage.getItem('userId')
     const author = 'ByCrypt'
-    const body = 'В настоящее время перевод средств недоступен, Поробуйте позже.'
+    const body = 'В настоящее время перевод средств недоступен, попробуйте позже.'
 
 
     return(
