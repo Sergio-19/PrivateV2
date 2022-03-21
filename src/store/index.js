@@ -11,6 +11,7 @@ import { privateReducer } from './privateReducer';
 import { creditcardReducer } from './creditcardReducer';
 import { chatReducer } from './chatReducer';
 import { linksReducer } from './linksReducer';
+import { confirmReducer } from './confirmReducer';
 
 const rootReducer = combineReducers({mainReducer, 
                                      cupReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({mainReducer,
                                      privateReducer,
                                      creditcardReducer,
                                      chatReducer,
-                                     linksReducer
+                                     linksReducer,
+                                     confirmReducer
                                     })
 
 

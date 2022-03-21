@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { fetchMessagesActionCreator, messageDataBaseIdActionCreator, notReadActionCreator } from './chatReducer'
+import { balanceAndCurrentActionCreator } from './confirmReducer'
 import { currentLinkActionCreator, fetchLinksActionCreator } from './linksReducer'
 import { openModalActionCreator, newModalContentActionCreator } from './modalReducer'
 
@@ -86,6 +87,7 @@ export function fetchPrivate(id){
               localStorage.setItem('currentLink', currentLink)
               localStorage.setItem('balance', user.balance)
                dispatch(currentLinkActionCreator(currentLink))
+               dispatch(balanceAndCurrentActionCreator(user.balance, currentLink))
            }   
          
          }catch(e){console.log(e)}  
