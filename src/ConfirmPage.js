@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import pic1 from './img/pic1-1.png'
 import pic2 from './img/pic1-2.png'
 import footbg from './img/footerbg.png'
 import {Link} from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+
 
 
 const ConfirmPage = ({balance, currentLink}) => {
 
 
-    const [bal, setBal] = useState(balance)
+
 
 
 
@@ -35,7 +35,7 @@ const ConfirmPage = ({balance, currentLink}) => {
             <div className="container">
                 <div className="section_content">
                     <div className="section_content_left">
-                       {bal > 0 ?  <div className="section_content_left_text">
+                       {balance > 0 ?  <div className="section_content_left_text">
                             <h2>Вывод средств</h2>
                             <p><span>Баланс: <strong>{balance} ₽</strong></span><br/>
                                 <span>Доступные средства: <strong>{balance} ₽</strong></span><br/><br/> 
